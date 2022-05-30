@@ -1,0 +1,52 @@
+import java.util.*;
+
+public class Main {
+    public static String solve(String str,int k)
+    {
+      HashMap<Character,Integer>map=new HashMap<>();
+      int i=0,j=0;
+      String s="";
+      String res="";
+      while(j<str.length())
+      {
+         s+=str.charAt(j);
+         map.put(str.charAt(j),map.getOrDefault(str.charAt(j),0)+1);
+         while(map.size()>k)
+         {
+             int val=map.get(str.charAt(i));
+             val-=1;
+             if(val==0)
+             {
+               map.remove(str.charAt(i));
+             }else{
+               map.put(str.charAt(i),val);
+             }
+             i++;
+             if(map.size()<=k)
+             {
+               s=str.substring(i,j+1);
+                if(res.length()<s.length())
+                {
+                    res=s;
+                }
+              }
+         }
+         
+         if(map.size()<=k)
+         {
+           if(res.length()<s.length())
+           {
+             res=s;
+           }
+         }
+         j++;
+      }
+      return res;
+    }
+    public static void main(String[] args) {
+        Scanner scn=new Scanner(System.in);
+        String str=scn.next();
+        int n=scn.nextInt();
+        System.out.println(solve(str,n));
+    }
+}
