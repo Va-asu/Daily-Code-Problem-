@@ -1,0 +1,68 @@
+class MedianFinder {
+    
+    PriorityQueue<Integer>A;//give min of maximum elements 
+    PriorityQueue<Integer>B;//give max of minimum elements
+    public MedianFinder() {
+        A=new PriorityQueue<Integer>();
+        B=new PriorityQueue<Integer>(Collections.reverseOrder());
+    }
+    
+    public void addNum(int num) {
+        if(B.size()==0)
+        {
+            B.add(num);
+        }else if(B.size()>A.size())
+        {
+            int bNum=B.peek();
+            if(bNum<=num)
+            {
+                A.add(num);
+            }else{
+                B.poll();
+                B.add(num);
+                A.add(bNum);
+            }
+        }else if(B.size()==A.size()){
+            int aNum=A.peek();
+            if(aNum>=num)
+            {
+                B.add(num);
+            }else{
+                A.poll();
+                B.add(aNum);
+                A.add(num);
+            }
+        }else if(B.size()<A.size())
+        {
+            int aNum=A.peek();
+            if(aNum>=num)
+            {
+                B.add(num);
+            }else{
+                A.poll();
+                A.add(num);
+                B.add(aNum);
+            }
+        }
+        
+       // System.out.println("MIN "+B+" min is "+B.peek());
+       // System.out.println("MAX "+ A+" max is "+A.peek());
+    }
+    
+    public double findMedian() {
+        int s=A.size()+B.size();
+        if(s%2==0)
+        {
+            return ((double)A.peek()+(double)B.peek())/2;
+        }else{
+            return (double)B.peek();
+        }
+    }
+}
+
+/**
+ * Your MedianFinder object will be instantiated and called as such:
+ * MedianFinder obj = new MedianFinder();
+ * obj.addNum(num);
+ * double param_2 = obj.findMedian();
+ */
