@@ -1,0 +1,30 @@
+class Solution {
+        int max1=Integer.MAX_VALUE;
+        Integer max2=null;
+    public int findSecondMinimumValue(TreeNode root) {
+        solve(root);
+        return max2==null?-1:max2;
+    }
+    public void solve(TreeNode root)
+    {
+        if(root==null)
+        {
+            return;
+        }
+        int min=root.val;
+         if(max1>min)
+        {
+            max2=max2!=null?max1:null;
+            max1=min;
+        }else if(min>max1)
+        {
+            if(max2==null||min<max2)
+            {
+                max2=min;
+            }
+        }
+        solve(root.left);
+        solve(root.right);
+    }
+    
+}
