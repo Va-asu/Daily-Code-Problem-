@@ -1,0 +1,28 @@
+import java.util.*;
+public class Main
+{
+    public static void solve(List<String>str,String input,String output)
+    {
+        if(input.equals(""))
+        {
+            str.add(output);
+            return;
+        }
+        
+        char ch=input.charAt(0);
+        
+        String op1=output+" ";
+        String op2=output+ch;
+        solve(str,input.substring(1),op1);
+        solve(str,input.substring(1),op2);
+        
+        
+    }
+	public static void main(String[] args) {
+	    Scanner scn=new Scanner(System.in);
+	    String set=scn.next();
+	    List<String>list=new ArrayList<>();
+	    solve(list,set,"");
+		list.forEach(System.out::println);
+	}
+}
