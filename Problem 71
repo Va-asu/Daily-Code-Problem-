@@ -1,0 +1,21 @@
+import java.util.*;
+
+public class Main {
+  
+    public static void main(String[] args) {
+      System.out.println("random between 1 to 7 :- "+rand7());
+      System.out.println("random between 1 to 5 :- "+rand5());
+    }
+    
+     public static int rand5(){
+      int num=(int)(Math.random()*5);
+      
+      return num+1;
+    } 
+    
+    public static int rand7(){
+      int num=(int)(Math.random()*7);
+      
+      return num+1;
+    } 
+}
